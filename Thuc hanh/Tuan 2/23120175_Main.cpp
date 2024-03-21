@@ -11,5 +11,6 @@ int main()
     Prime(a, n);
     cout << "Mang sau khi dao nguoc: ";
     reverseArray(a, n);
+    delete[] a;
     return 0;
 }
