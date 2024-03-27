@@ -2,7 +2,10 @@
 
 void createAndExportArray(int *&a, int &n)
 {
+    cout << "Nhap so phan tu: ";
     cin >> n;
+    a = new int[n];
+    cout << "Nhap cac phan tu: ";
     for (int i = 0; i < n; i++)
         cin >> a[i];
     for (int i = 0; i < n; i++)
@@ -26,7 +29,7 @@ void isAscendingOrDecreasing(int *a, int n)
     else if (isDecreasing == false && isAcending == true)
         cout << "Mang tang dan" << endl;
     else
-        cout << "Khong tang khong giam" << endl;
+        cout << "Mang khong tang khong giam" << endl;
 }
 int sumArray(int *a, int n)
 {

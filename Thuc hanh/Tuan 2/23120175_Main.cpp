@@ -3,7 +3,8 @@
 int main()
 {
     int n = 0;
-    int *a = new int[n];
+    int* a;
+    //int* a = new int[n];
     createAndExportArray(a, n);
     cout << "Tong cac phan tu trong mang: " << sumArray(a, n) << endl;
     cout << "Phan tu lon nhat trong mang la: " << findMax(a, n) << endl;
