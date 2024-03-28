@@ -105,6 +105,8 @@ int **deleteCol(int **a, int row, int col, int k)
     int **b = allocateMatrix(row, col - 1);
     cout << "Nhap so cot can xoa: ";
     cin >> k;
+    if (k > col)
+        return a;
     for (int i = 0; i < row; i++)
         for (int j = 0; j < k; j++)
             b[i][j] = a[i][j];
