@@ -105,8 +105,11 @@ int **deleteCol(int **a, int row, int col, int k)
     int **b = allocateMatrix(row, col - 1);
     cout << "Nhap so cot can xoa: ";
     cin >> k;
-    if (k > col)
-        return a;
+    while (k >= col)
+    {
+        cout << "Vui long nhap so dong nho hon so cot" << endl;
+        cin >> k;
+    }
     for (int i = 0; i < row; i++)
         for (int j = 0; j < k; j++)
             b[i][j] = a[i][j];
@@ -124,10 +127,11 @@ void deleteMatrix(int **&a, int row, int col)
 int main()
 {
     int row, col;
-    int k;
+    int k = 0;
     srand(time(0));
     int **a = createMatrix(row, col);
     printMatrix(a, row, col);
+    cout << "CAC DONG HOAC COT TANG DAN LA: " << endl;
     matrixAscending(a, row, col);
     cout << endl;
     cout << "MA TRAN SAU KHI CHUYEN VI" << endl;
@@ -144,8 +148,8 @@ int main()
     int **d = deleteCol(a, row, col, k);
     printMatrix(d, row, col - 1);
     deleteMatrix(a, row, col);
-    deleteMatrix(b, row, col);
+    deleteMatrix(b, col, row);
     deleteMatrix(c, row, col);
-    deleteMatrix(d, row, col);
+    deleteMatrix(d, row, col - 1);
     return 0;
 }
