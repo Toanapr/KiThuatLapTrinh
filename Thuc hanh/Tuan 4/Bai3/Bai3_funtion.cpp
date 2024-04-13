@@ -154,3 +154,13 @@ void printList(linkList l)
     }
     cout << endl;
 }
+void deleteList(linkList &l)
+{
+    while (l.head != NULL)
+    {
+        Node *de = l.head;
+        l.head = l.head->next;
+        delete de;
+    }
+    l.head = NULL;
+}

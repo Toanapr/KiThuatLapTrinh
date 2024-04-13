@@ -48,5 +48,6 @@ int main()
     Sort(l);
     printList(l);
 
+    deleteList(l);
     return 0;
 }

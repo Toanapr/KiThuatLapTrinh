@@ -28,5 +28,5 @@ float getAverageScoreList(linkList l);
 void Sort(linkList &l);
 void swap(int *a, int *b);
 void printList(linkList l);
-
+void deleteList(linkList &l);
 #endif
