@@ -105,21 +105,44 @@ void swap(Student*& a, Student*& b)
 	swap_buffalo(a->englishScore, b->englishScore);
 	swap_buffalo(a->averageScore, b->averageScore);
 }
+void swap(Student* prev1, Student* curr1, Student* prev2, Student* curr2)
+{
+	prev1->next = curr2;
+	prev2->next = curr1;
+	Student* temp = curr1->next;
+	curr1->next = curr2->next;
+	curr2->next = temp;
+}
 void Sort(StudentList& l)
 {
+	Student* add = new Student();
+	addHead(l, add);
+
 	Student* temp = l.head;
-	for (Student* i = l.head; i != NULL; i = i->next)
-		for (Student* j = i; j != NULL; j = j->next)
+	for (Student* i = l.head; i != NULL && i->next != NULL; i = i->next)
+		for (Student* j = i; j != NULL && j->next != NULL; j = j->next)
 		{
-			if (i->name > j->name)
+			/*if (i->name > j->name)
 			{
 				swap(i, j);
 			}
 			else if (i->name == j->name && i->averageScore > j->averageScore)
 			{
 				swap(i, j);
+			}*/
+			if (i->next->name > j->next->name)
+			{
+				swap(i, i->next, j, j->next);
+			}
+			else if (i->next->name == j->next->name && i->next->averageScore > j->next->averageScore)
+			{
+				swap(i,i->next, j, j->next);
 			}
 		}
+
+	if (l.head != NULL)
+		l.head = l.head->next;
+	delete add;
 }
 StudentList getStudentGood(StudentList l)
 {
