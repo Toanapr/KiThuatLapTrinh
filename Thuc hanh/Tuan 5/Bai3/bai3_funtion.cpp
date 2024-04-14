@@ -37,6 +37,20 @@ int getAge(int day, int month, int year)
 		age--;
 	return age;
 }
+float getRoundAverage(float n)
+{
+	float decimal = n - int(n);
+	if (decimal >= 0 && decimal < 0.125)
+		return 0;
+	else if (decimal >= 0.125 && decimal < 0.25 + 0.125)
+		return 0.25;
+	else if (decimal >= 0.25 + 0.125 && decimal < 0.5 + 0.125)
+		return 0.5;
+	else if (decimal >= 0.5 + 0.125 && decimal < 0.75 + 0.125)
+		return 0.75;
+	else
+		return 1;
+}
 void readFile(fstream& input, StudentList& l)
 {
 	string temp;
@@ -53,14 +67,14 @@ void readFile(fstream& input, StudentList& l)
 		node->mathScore = stoi(temp.substr(space[2] + 1, space[3] - space[2]));
 		node->literatureScore = stoi(temp.substr(space[3] + 1, space[4] - space[3]));
 		node->englishScore = stoi(temp.substr(space[4] + 1));
-		node->averageScore = (node->mathScore + node->literatureScore + node->englishScore) / 3;
+		node->averageScore = int((node->mathScore + node->literatureScore + node->englishScore) / 3.0) + getRoundAverage((node->mathScore + node->literatureScore + node->englishScore) / 3.0);
 		node->age = getAge(node->date, node->month, node->year);
 		addHead(l, node);
 	}
 }
 void printStudent(Student* st)
 {
-	cout << st->name << " " << st->gender << " " << st->date << "/" << st->month << "/" << st->year << " " << st->mathScore << " " << st->literatureScore << " " << st->englishScore << endl;
+	cout << st->name << " " << st->gender << " " << st->date << "/" << st->month << "/" << st->year << " " << st->mathScore << " " << st->literatureScore << " " << st->englishScore << " " << st->averageScore << endl;
 }
 void printList(StudentList l)
 {
@@ -70,4 +84,55 @@ void printList(StudentList l)
 		printStudent(temp);
 		temp = temp->next;
 	}
+}
+template <class type>
+void swap_buffalo(type &a, type &b)
+{
+	type temp = a;
+	a = b;
+	b = temp;
+}
+void swap(Student*& a, Student*& b)
+{
+	swap_buffalo(a->age, b->age);
+	swap_buffalo(a->name, b->name);
+	swap_buffalo(a->gender, b->gender);
+	swap_buffalo(a->date, b->date);
+	swap_buffalo(a->month, b->month);
+	swap_buffalo(a->year, b->year);
+	swap_buffalo(a->mathScore, b->mathScore);
+	swap_buffalo(a->literatureScore, b->literatureScore);
+	swap_buffalo(a->englishScore, b->englishScore);
+	swap_buffalo(a->averageScore, b->averageScore);
+}
+void Sort(StudentList& l)
+{
+	Student* temp = l.head;
+	for (Student* i = l.head; i != NULL; i = i->next)
+		for (Student* j = i; j != NULL; j = j->next)
+		{
+			if (i->name > j->name)
+			{
+				swap(i, j);
+			}
+			else if (i->name == j->name && i->averageScore > j->averageScore)
+			{
+				swap(i, j);
+			}
+		}
+}
+StudentList getStudentGood(StudentList l)
+{
+	StudentList studentGoodList = newList();
+	Student* temp = l.head;
+	while (temp != NULL)
+	{
+		if (temp->averageScore >= 8 && temp->mathScore > 7 && temp->literatureScore > 7 && temp->englishScore > 7)
+		{
+			Student* add = new Student(temp);
+			addHead(studentGoodList, add);
+		}
+		temp = temp->next;
+	}
+	return studentGoodList;
 }

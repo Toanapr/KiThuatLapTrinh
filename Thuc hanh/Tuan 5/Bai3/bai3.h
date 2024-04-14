@@ -20,7 +20,7 @@ struct Student
 	int mathScore;
 	int literatureScore;
 	int englishScore;
-	int averageScore;
+	float averageScore;
 	Student* next;
 
 	Student()
@@ -37,6 +37,20 @@ struct Student
 		averageScore = 0;
 		next = NULL;
 	}
+	Student(Student *add)
+	{
+		name = add->name;
+		gender = add->gender;
+		date = add->date;
+		month = add->month;
+		year = add->year;
+		age = add->age;
+		mathScore = add->mathScore;
+		literatureScore = add->literatureScore;
+		englishScore = add->englishScore;
+		averageScore = add->averageScore;
+		next = NULL;
+	}
 };
 struct StudentList
 {
@@ -47,6 +61,7 @@ struct StudentList
 StudentList newList();
 void readFile(fstream& input, StudentList& l);
 void printList(StudentList l);
-
+void Sort(StudentList& l);
+StudentList getStudentGood(StudentList l);
 
 #endif
