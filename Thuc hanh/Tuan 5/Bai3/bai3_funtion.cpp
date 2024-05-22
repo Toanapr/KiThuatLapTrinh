@@ -159,3 +159,13 @@ StudentList getStudentGood(StudentList l)
 	}
 	return studentGoodList;
 }
+void deleteList(StudentList& l)
+{
+	while (l.head != NULL)
+	{
+		Student* de = l.head;
+		l.head = l.head->next;
+		delete de;
+	}
+	l.head = NULL;
+}

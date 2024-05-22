@@ -1,5 +1,5 @@
-#ifndef _BAI3_H_
-#define _BAI3_H_
+#ifndef _BAI4_H_
+#define _BAI4_H_
 
 #include <iostream>
 #include <fstream>
@@ -9,7 +9,7 @@
 
 using namespace std;
 
-struct Student 
+struct Student
 {
 	string name;
 	string gender;
@@ -37,7 +37,7 @@ struct Student
 		averageScore = 0;
 		next = NULL;
 	}
-	Student(Student *add)
+	Student(Student* add)
 	{
 		name = add->name;
 		gender = add->gender;
@@ -61,8 +61,9 @@ struct StudentList
 StudentList newList();
 void readFile(fstream& input, StudentList& l);
 void printList(StudentList l);
-void Sort(StudentList& l);
-StudentList getStudentGood(StudentList l);
+int* arrayOfTotalPoint(StudentList l);
+void printArray(int* a, int size);
+int findMax(int* a, int size);
 void deleteList(StudentList& l);
 
 #endif
